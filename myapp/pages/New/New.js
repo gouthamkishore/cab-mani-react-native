@@ -25,4 +25,4 @@ export class App extends Component {
     }
 }
 
-export default App;//connect(App);
+export default connect(App);
