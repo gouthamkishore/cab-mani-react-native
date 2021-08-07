@@ -1,3 +1,4 @@
+import "./app-services/imports";
 import React, { Component } from "react";
 import { StyleSheet } from 'react-native';
 import view from "./App.view";
