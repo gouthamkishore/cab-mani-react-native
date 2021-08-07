@@ -3,7 +3,11 @@ import React, { Component } from "react";
 import { StyleSheet } from 'react-native';
 import view from "./App.view";
 import style from "./App.style";
+import store from "./app-services/store";
+import storeSynchronize from 'redux-localstore';
 const appstyles = StyleSheet.create(style);
+const storeState = store();
+storeSynchronize(storeState);
 
 export class App extends Component {
     constructor(props) {
@@ -22,8 +26,8 @@ export class App extends Component {
     }
     render() {
         //initialConstruct.bind(this)("App");
-        return view.bind(this)(this.props, this.props.store, this.state, appstyles, "App");
+        return view.bind(this)(this.props, this.props.store, this.state, appstyles, "App", storeState);
     }
 }
 
-export default App;//connect(App);
+export default App;

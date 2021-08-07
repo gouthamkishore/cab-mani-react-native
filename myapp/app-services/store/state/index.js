@@ -9,53 +9,53 @@ const state = {
         "Completed",
         "Return Initiated"
     ],
-    checkout:{
-        name:"",
-        address:"",
-        mobile:"",
-        email:""
+    checkout: {
+        name: "",
+        address: "",
+        mobile: "",
+        email: ""
     },
-    bookingDetails:{
-        orders:[]
+    bookingDetails: {
+        orders: []
     },
     vehicleSlot: {
-        orders:[]
+        orders: []
     },
     trips: [],
-    desinations:[
+    desinations: [
         { name: "source" },
         { name: "destination" },
     ],
     company_list: [],
-    vehicleFilters:{
-        passenger:{},
-        "car-type":{},
-        bags:{}
+    vehicleFilters: {
+        passenger: {},
+        "car-type": {},
+        bags: {}
     },
-    vehicleTypes:[],
+    vehicleTypes: [],
     vehicle_list: [],
-    searched_vehicle_list:{
-        vehResult:[]
+    searched_vehicle_list: {
+        vehResult: []
     },
     crddtl: [],
-    amountSlabs:[10,30,60,100],
-    searched_vehicle_obj:{
-        FromId:0,
-        ToId:[],
-        FromDate:new Date("1000-01-01"),
-        ToDate:new Date("1000-01-01"),
-        PickUpTime:new Date().toAM(),
-        tripType:'outstation',
+    amountSlabs: [10, 30, 60, 100],
+    searched_vehicle_obj: {
+        FromId: 0,
+        ToId: [],
+        FromDate: new Date("1000-01-01"),
+        ToDate: new Date("1000-01-01"),
+        PickUpTime: new Date().toAM(),
+        tripType: 'outstation',
         roundTrip: false,
-        percent:100
+        percent: 100
     },
-    user:false,
+    user: false,
     alert: {
         open: false,
-        content: <div>Alert</div>,
+        content: "",
         title: "",
     },
-    vehicle_types:[
+    vehicle_types: [
         {
             name: "Swift Dzire",
             path: "swift_dzire.png",
@@ -147,14 +147,14 @@ const state = {
     latestServices: [
         {
             sl: 1,
-            name:"city-transfer",
+            name: "city-transfer",
             title: "City Transfer",
             icon: "city-transport.png",
-            description:"Safe and secured interstate transfer with luxury cars and busses in good conditions vehicles smooth and reliable transfer any location in India.",
+            description: "Safe and secured interstate transfer with luxury cars and busses in good conditions vehicles smooth and reliable transfer any location in India.",
         },
         {
             sl: 2,
-            name:"airport-pickup-drop",
+            name: "airport-pickup-drop",
             title: "Airport Pickup-Drop",
             icon: "airport-transport.png",
             description:
@@ -162,7 +162,7 @@ const state = {
         },
         {
             sl: 3,
-            name:"hospital-transfer",
+            name: "hospital-transfer",
             title: "Hospital Transfer",
             icon: "hospital-transport.png",
             description: `We can transfer safe
@@ -175,7 +175,7 @@ const state = {
         {
             sl: 4,
             title: "Whole City Tour",
-            name:"whole-city-tour",
+            name: "whole-city-tour",
             icon: "hotel-transport.png",
             description: `Whole city tour we
              can provide luxury vehicles support
@@ -185,7 +185,7 @@ const state = {
         },
         {
             sl: 5,
-            name:"wedding-ceremony",
+            name: "wedding-ceremony",
             title: "Wedding Ceremony",
             icon: "wedding-ceremony.png",
             description: `Book wedding special car for 
@@ -195,7 +195,7 @@ const state = {
         },
         {
             sl: 6,
-            name:"luggage-transfer",
+            name: "luggage-transfer",
             title: "Luggage Transfer",
             icon: "luggege-transport.png",
             description: `Book wedding special car for 
@@ -204,6 +204,6 @@ const state = {
             bus facility safe and secure `,
         }
     ],
-    ...JSON.parse(localStorage.reduxStore||"{}")
+    ...JSON.parse(localStorage.reduxStore || "{}")
 };
 export default state;
