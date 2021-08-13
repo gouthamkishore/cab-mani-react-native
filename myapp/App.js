@@ -97,8 +97,8 @@ export default function App() {
       injectedJavaScript={jscode}
       renderLoading={ActivityIndicatorElement}
       style={{ flex: 1, marginTop: Constants.statusBarHeight }}
-      source={{ uri: "https://findmycabs.com" }}
-      // source={{ uri: "http://192.168.0.107:3000" }}
+      //source={{ uri: "https://findmycabs.com" }}
+       source={{ uri: "http://192.168.1.3:3000" }}
       // source={{
       //   html: html,
       // }}
