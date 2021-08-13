@@ -14,6 +14,9 @@ import Constants from "expo-constants";
 import * as Updates from "expo-updates";
 import * as Device from "expo-device";
 //import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import { URL, DEV_URL } from "@env"
+
+
 export default function App() {
   const webviewRef = useRef();
   //update code
@@ -97,7 +100,7 @@ export default function App() {
       renderLoading={ActivityIndicatorElement}
       style={{ flex: 1, marginTop: Constants.statusBarHeight }}
       //source={{ uri: "https://findmycabs.com" }}
-      source={{ uri: "http://192.168.29.224:3000" }}
+      source={{ uri: DEV_URL }}
       // source={{
       //   html: html,
       // }}
