@@ -1,33 +1,130 @@
-import "./app-services/imports";
-import React, { Component } from "react";
-import { StyleSheet } from 'react-native';
-import view from "./App.view";
-import style from "./App.style";
-import store from "./app-services/store";
-import storeSynchronize from 'redux-localstore';
-const appstyles = StyleSheet.create(style);
-const storeState = store();
-storeSynchronize(storeState);
+import React, { useRef } from "react";
 
-export class App extends Component {
-    constructor(props) {
-        super(props);
-        //initialConstruct.bind(this)("App");
-        this.state = {};
-    }
+//import all the components we are going to use
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  Text,
+  Image,
+} from "react-native";
+import { WebView } from "react-native-webview";
+import Constants from "expo-constants";
+import * as Updates from "expo-updates";
+import * as Device from "expo-device";
+export default function App() {
+  const webviewRef = useRef();
+  //update code
 
-    componentDidMount() {
-        let self = this;
+  const checkforupdates = async () => {
+    try {
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        await Updates.fetchUpdateAsync();
+        // ... notify user of update ...
+        await Updates.reloadAsync();
+      }
+    } catch (e) {
+      // handle or log error
+      alert(e);
     }
-    componentDidUpdate(prevProps, prevState) {
-        let self = this;
-        //this.watch({}, prevState, this.state);
-        //this.watch({}, prevProps);
-    }
-    render() {
-        //initialConstruct.bind(this)("App");
-        return view.bind(this)(this.props, this.props.store, this.state, appstyles, "App", storeState);
-    }
+  };
+  React.useEffect(() => {
+    checkforupdates();
+  }, []);
+
+  // for activity indicator
+  const ActivityIndicatorElement = () => {
+    return (
+      <View style={styles.activityIndicatorStyle}>
+        <Image
+          source={require("./assets/logo.png")}
+          style={{ width: 100, height: 100, borderRadius: 50 }}
+        />
+
+        <Text
+          style={{
+            marginVertical: 10,
+            fontSize: 30,
+            textAlign: "center",
+            width: "90%",
+          }}
+        >
+          Loading Please Wait
+        </Text>
+        <ActivityIndicator color="#009688" size="large" />
+        <View
+          style={{ height: "45%", backgroundColor: "#fff", width: "100%" }}
+        ></View>
+      </View>
+    );
+  };
+
+  //getting device information
+
+  const osName = Device.osName;
+  const brand = Device.brand;
+  const modelName = Device.modelName;
+  const modelId = Device.modelId;
+  const osVersion = Device.osVersion;
+  const osbuild = Device.osBuildId;
+  const isDevice = Device.isDevice;
+  const Manufacturer = Device.manufacturer;
+  const totalMemory = Device.totalMemory;
+
+  const jscode = `window.mobapp={
+    "name":"${osName}",
+    "Brand":"${brand}",
+    "ModelName":"${modelName}",
+    "ModelId":"${modelId}",
+    "OsVersion":"${osVersion}",
+    "OsBuild":"${osbuild}",
+    "IsDevice":"${isDevice}",
+    "Manufacturer":"${Manufacturer}",
+    "totalMemory":"${totalMemory}"
+  }`;
+
+  // const jscode = `
+  //   window.mobapp={"amount":"100"}
+  // `;
+  const html = `<html>
+  <body>
+      <script>
+          alert(JSON.stringify(window.mobapp));
+      </script>
+  </body>
+  </html>`;
+  return (
+    <WebView
+      javaScriptEnabled={true}
+      startInLoadingState={true}
+      injectedJavaScriptBeforeContentLoaded={jscode}
+      injectedJavaScript={jscode}
+      renderLoading={ActivityIndicatorElement}
+      style={{ flex: 1, marginTop: Constants.statusBarHeight }}
+      source={{ uri: "https://findmycabs.com" }}
+      // source={{
+      //   html: html,
+      // }}
+      onMessage={(event) => {}}
+      //For the Cache
+      domStorageEnabled={true}
+
+      //View to show while loading the webpage
+    />
+  );
 }
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  activityIndicatorStyle: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+  },
+});
