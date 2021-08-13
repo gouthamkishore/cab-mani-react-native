@@ -13,7 +13,10 @@ import { WebView } from "react-native-webview";
 import Constants from "expo-constants";
 import * as Updates from "expo-updates";
 import * as Device from "expo-device";
-import { getUniqueId, getManufacturer } from 'react-native-device-info';
+//import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import { URL, DEV_URL } from "@env"
+
+
 export default function App() {
   const webviewRef = useRef();
   //update code
@@ -71,11 +74,11 @@ export default function App() {
   const osVersion = Device.osVersion;
   const osbuild = Device.osBuildId;
   const isDevice = Device.isDevice;
-  const Manufacturer = getManufacturer();//Device.manufacturer;
+  const Manufacturer = Device.manufacturer;//getManufacturer();//Device.manufacturer;
   const totalMemory = Device.totalMemory;
-  const uniqueId = getUniqueId();
+  //const uniqueId = getUniqueId();
 
-  DeviceInfo.getUniqueId()
+  //DeviceInfo.getUniqueId()
 
   const jscode = `window.mobapp={
     "name":"${osName}",
@@ -86,8 +89,7 @@ export default function App() {
     "OsBuild":"${osbuild}",
     "IsDevice":"${isDevice}",
     "Manufacturer":"${Manufacturer}",
-    "totalMemory":"${totalMemory}",
-    "uniqueId":"${uniqueId}"
+    "totalMemory":"${totalMemory}"
   }`;
   return (
     <WebView
@@ -98,15 +100,6 @@ export default function App() {
       renderLoading={ActivityIndicatorElement}
       style={{ flex: 1, marginTop: Constants.statusBarHeight }}
       //source={{ uri: "https://findmycabs.com" }}
-       source={{ uri: "http://192.168.1.3:3000" }}
-      // source={{
-      //   html: html,
-      // }}
-      onMessage={(event) => { }}
-      //For the Cache
-      domStorageEnabled={true}
-
-    //View to show while loading the webpage
     />
   );
 }
