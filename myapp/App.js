@@ -88,6 +88,7 @@ export default function App() {
     "Manufacturer":"${Manufacturer}",
     "totalMemory":"${totalMemory}"
   }`;
+  console.log("DEV_URL", DEV_URL);
   return (
     <WebView
       javaScriptEnabled={true}
