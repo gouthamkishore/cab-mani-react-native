@@ -1,6 +1,4 @@
 import React, { useRef } from "react";
-
-//import all the components we are going to use
 import {
   SafeAreaView,
   StyleSheet,
@@ -19,7 +17,6 @@ import { URL, DEV_URL } from "@env"
 
 export default function App() {
   const webviewRef = useRef();
-  //update code
 
   const checkforupdates = async () => {
     try {
@@ -91,6 +88,7 @@ export default function App() {
     "Manufacturer":"${Manufacturer}",
     "totalMemory":"${totalMemory}"
   }`;
+  console.log("DEV_URL", DEV_URL);
   return (
     <WebView
       javaScriptEnabled={true}
@@ -99,7 +97,12 @@ export default function App() {
       injectedJavaScript={jscode}
       renderLoading={ActivityIndicatorElement}
       style={{ flex: 1, marginTop: Constants.statusBarHeight }}
-      //source={{ uri: "https://findmycabs.com" }}
+      source={{ uri: DEV_URL }}
+      onMessage={(event) => { }}
+      //For the Cache
+      domStorageEnabled={true}
+
+    //View to show while loading the webpage
     />
   );
 }
