@@ -100,15 +100,6 @@ export default function App() {
       renderLoading={ActivityIndicatorElement}
       style={{ flex: 1, marginTop: Constants.statusBarHeight }}
       //source={{ uri: "https://findmycabs.com" }}
-      source={{ uri: DEV_URL }}
-      // source={{
-      //   html: html,
-      // }}
-      onMessage={(event) => { }}
-      //For the Cache
-      domStorageEnabled={true}
-
-    //View to show while loading the webpage
     />
   );
 }
